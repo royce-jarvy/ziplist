@@ -1,30 +1,37 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-unsafe-return */
-// Works with any[] so disabled settings that prevented use of any[]
+function zipList(list1: unknown[], list2: unknown[]): unknown[] {
+  const ziplist: unknown[] = [];
 
-function zipList(list1: any[], list2: any[]): any[] {
-  const ziplist: any[] = [];
-
+  // Check if lists are same length
   if (list1.length !== list2.length) {
+    // returns empty list if not same
     return ziplist;
   }
 
   for (let i = 0; i < list1.length; i++) {
-    ziplist.push(list1[i]);
-    ziplist.push(list2[i]);
+    ziplist.push(list1[i], list2[i]);
   }
 
   return ziplist;
 }
 
-function zipListTheFunctionalWay(list1: any[], list2: any[]): any[] | undefined {
-  let ziplist: any[] = [];
+console.log('zipList test: ');
+console.log(zipList(['a', 'b', 'c'], [1, 2, 3]));
+console.log(zipList(['a', 'b'], [1, 2, 3]));
 
+function zipListTheFunctionalWay(list1: unknown[], list2: unknown[]): unknown[] {
+  const ziplist: unknown[] = [];
+
+  // Check if lists are same length
   if (list1.length !== list2.length) {
+    // returns empty list if not same
     return ziplist;
   }
 
-  ziplist = list1.concat(list2);
+  list1.forEach((element, index) => ziplist.push(element, list2[index]));
 
   return ziplist;
 }
+
+console.log('\nzipListTheFunctionalWay test: ');
+console.log(zipListTheFunctionalWay(['a', 'b', 'c'], [1, 2, 3]));
+console.log(zipListTheFunctionalWay(['a', 'b'], [1, 2, 3]));
